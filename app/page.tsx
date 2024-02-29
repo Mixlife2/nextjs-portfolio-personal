@@ -5,6 +5,10 @@ import Particles from "./components/particles";
 const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Contact", href: "/contact" },
+  { name: "Courses", href: "/courses" },
+  { name: "About Me", href: "/aboutme" },
+  { name: "Blog", href: "/blogpage" },
+  
 ];
 
 export default function Home() {
@@ -38,10 +42,10 @@ export default function Home() {
           I'm building{" "}
           <Link
             target="_blank"
-            href="https://unkey.dev"
+            href="turboweb.com.ar"
             className="underline duration-500 hover:text-zinc-300"
           >
-            unkey.dev
+            turboweb
           </Link> to solve API authentication and authorization for developers.
         </h2>
       </div>
