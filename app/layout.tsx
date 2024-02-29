@@ -11,14 +11,14 @@ export const metadata: Metadata = {
   },
   description: "Full stack-dev",
   openGraph: {
-    title: "chronark.com",
+    title: "eddylover.com",
     description:
       "Full stack-dev",
     url: "https://chronark.com",
-    siteName: "chronark.com",
+    siteName: "eddylover.com",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "https://eddylover.png",
         width: 1920,
         height: 1080,
       },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Chronark",
+    title: "Eddy",
     card: "summary_large_image",
   },
   icons: {
@@ -66,8 +66,7 @@ export default function RootLayout({
         <Analytics />
       </head>
       <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-          }`}
+        className={`bg-black text-white ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined}`}
       >
         {children}
       </body>
