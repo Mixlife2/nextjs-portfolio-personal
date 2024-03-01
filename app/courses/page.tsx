@@ -44,7 +44,19 @@ const CoursesList = () => {
         instructor: "Jane Smith"
       }
     },
-    // Agrega más cursos según necesites
+    { 
+      id: 4,
+      name: "Responsive Web Design ", 
+      platform: "FreeCodeCamp", 
+      duration: "300 hours",
+      description: "In this Responsive Web Design Certification, you'll learn the languages that developers use to build webpages: HTML (Hypertext Markup Language) for content, and CSS (Cascading Style Sheets) for design.",
+      certification: "Verified Certificate",
+      certificateInfo: {
+        imageUrl: "/certificates/react-essentials-certificate.jpg",
+        date: "February 2024",
+        instructor: "Jane Smith"
+      }
+    },
   ];
 
   return (
