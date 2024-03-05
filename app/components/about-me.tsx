@@ -8,7 +8,8 @@ export function aboutMe() {
           <div className="space-y-3 text-center">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">Edgar Villalba</h1>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Hello! My name is Edgar, I am a developer who immersed myself in this world in January 2023!
+            Hello! My name is Edgar, better known as Eddy, I entered the world of software development in January 2023, since then, I was actively learning technologies and languages ​​to be able to develop in the best way, I started doing free bootcamps like "Freecodecamp", then After a month I joined CoderHouse to learn what HTML, CSS and JS would be.
+Then, as a self-taught person that I consider myself to be, I have been creating projects to improve my skills and learn logic much better, this portfolio is halfway done, but I will try daily to make the updates that I feel are missing.
             </p>
           </div>
           <div className="mx-auto max-w-sm grid gap-2 items-stretch sm:max-w-none sm:grid-cols-4 sm:items-center md:gap-4">
