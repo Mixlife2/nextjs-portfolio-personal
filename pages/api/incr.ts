@@ -1,7 +1,15 @@
 import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from "next/server";
 
-const redis = Redis.fromEnv();
+let redis: Redis | null = null;
+try {
+  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    redis = Redis.fromEnv();
+  }
+} catch (error) {
+  console.log("Redis not configured, view tracking disabled");
+}
+
 export const config = {
   runtime: "edge",
 };
@@ -22,26 +30,43 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
   if (!slug) {
     return new NextResponse("Slug not found", { status: 400 });
   }
+  
+  // If Redis is not configured, return success without tracking
+  if (!redis) {
+    return new NextResponse(null, { status: 202 });
+  }
+
   const ip = req.ip;
   if (ip) {
-    // Hash the IP in order to not store it directly in your db.
-    const buf = await crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode(ip),
-    );
-    const hash = Array.from(new Uint8Array(buf))
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
+    try {
+      // Hash the IP in order to not store it directly in your db.
+      const buf = await crypto.subtle.digest(
+        "SHA-256",
+        new TextEncoder().encode(ip),
+      );
+      const hash = Array.from(new Uint8Array(buf))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
 
-    // deduplicate the ip for each slug
-    const isNew = await redis.set(["deduplicate", hash, slug].join(":"), true, {
-      nx: true,
-      ex: 24 * 60 * 60,
-    });
-    if (!isNew) {
-      new NextResponse(null, { status: 202 });
+      // deduplicate the ip for each slug
+      const isNew = await redis.set(["deduplicate", hash, slug].join(":"), true, {
+        nx: true,
+        ex: 24 * 60 * 60,
+      });
+      if (!isNew) {
+        return new NextResponse(null, { status: 202 });
+      }
+    } catch (error) {
+      console.error("Redis deduplication failed:", error);
+      // Continue to increment even if deduplication fails
     }
   }
-  await redis.incr(["pageviews", "projects", slug].join(":"));
+  
+  try {
+    await redis.incr(["pageviews", "projects", slug].join(":"));
+  } catch (error) {
+    console.error("Redis increment failed:", error);
+  }
+  
   return new NextResponse(null, { status: 202 });
 }
