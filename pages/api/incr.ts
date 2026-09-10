@@ -36,7 +36,7 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
     return new NextResponse(null, { status: 202 });
   }
 
-  const ip = req.ip;
+  const ip = req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip");
   if (ip) {
     try {
       // Hash the IP in order to not store it directly in your db.
