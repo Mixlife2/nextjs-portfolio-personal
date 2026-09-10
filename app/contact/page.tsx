@@ -7,22 +7,22 @@ import Particles from "../components/particles";
 
 const socials = [
 	{
-		icon: <Linkedin size={20} />,
-		href: "https://www.linkedin.com/in/eddy-kratochvil/_",
-		label: "Linkedin",
-		handle: "@edgarvillalbaaa",
-	},
-	{
-		icon: <Mail size={20} />,
-		href: "eddykratochvil@gmail.com",
-		label: "Email",
-		handle: "eddykratochvil@gmail.com",
-	},
-	{
 		icon: <Github size={20} />,
 		href: "https://github.com/Mixlife2",
 		label: "Github",
-		handle: "Mixlife",
+		handle: "Mixlife2",
+	},
+	{
+		icon: <Linkedin size={20} />,
+		href: "https://www.linkedin.com/in/edgar-villalba",
+		label: "LinkedIn",
+		handle: "Edgar Villalba",
+	},
+	{
+		icon: <Mail size={20} />,
+		href: "mailto:contact@edgarvillalba.dev",
+		label: "Email",
+		handle: "Get in touch",
 	},
 ];
 
