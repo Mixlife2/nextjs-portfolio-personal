@@ -84,6 +84,7 @@ export async function compileMDXContent(content: string) {
 		source: content,
 		options: {
 			parseFrontmatter: false,
+			blockJS: false,
 			mdxOptions: {
 				remarkPlugins: [remarkGfm],
 				rehypePlugins: [
