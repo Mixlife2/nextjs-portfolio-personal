@@ -8,38 +8,31 @@ export function aboutMe() {
           <div className="space-y-3 text-center">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">Edgar Villalba</h1>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Hello! My name is Edgar, better known as Eddy, I entered the world of software development in January 2023, since then, I was actively learning technologies and languages ​​to be able to develop in the best way, I started doing free bootcamps like "Freecodecamp", then After a month I joined CoderHouse to learn what HTML, CSS and JS would be.
-Then, as a self-taught person that I consider myself to be, I have been creating projects to improve my skills and learn logic much better, this portfolio is halfway done, but I will try daily to make the updates that I feel are missing.
+              Fullstack Software Engineer specializing in healthcare SaaS product development. Currently building at Canid, where I work across the stack—from React/TypeScript UI components and shadcn/ui design system migrations to backend API development, SQL database architecture, and cloud infrastructure with AWS Lambda.
+            </p>
+            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400 mt-4">
+              I focus on end-to-end feature delivery for complex clinical and operational workflows, including immunization registry integrations, patient eligibility systems, multi-practice management tools, and notification frameworks. My work emphasizes clean architecture, maintainable code, and user-centered design.
+            </p>
+            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400 mt-4">
+              Beyond professional work, I continue exploring new technologies through personal projects in Next.js, Java/Spring, and AI integrations, always learning and refining my craft.
             </p>
           </div>
-          <div className="mx-auto max-w-sm grid gap-2 items-stretch sm:max-w-none sm:grid-cols-4 sm:items-center md:gap-4">
+          <div className="mx-auto max-w-sm grid gap-2 items-stretch sm:max-w-none sm:grid-cols-2 sm:items-center md:gap-4">
             <Link
               className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 border-gray-200 bg-white text-sm shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300 dark:border-slate-800"
-              href="#"
+              href="https://github.com/Mixlife2"
+              target="_blank"
             >
-              <TwitterIcon className="w-4 h-4" />
-              <span className="sr-only">Twitter</span>
+              <GithubIcon className="w-4 h-4 mr-2" />
+              <span className="text-xs">GitHub</span>
             </Link>
             <Link
               className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 border-gray-200 bg-white text-sm shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300 dark:border-slate-800"
-              href="#"
+              href="https://www.linkedin.com/in/edgar-villalba"
+              target="_blank"
             >
-              <GithubIcon className="w-4 h-4" />
-              <span className="sr-only">GitHub</span>
-            </Link>
-            <Link
-              className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 border-gray-200 bg-white text-sm shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300 dark:border-slate-800"
-              href="#"
-            >
-              <DribbbleIcon className="w-4 h-4" />
-              <span className="sr-only">Dribbble</span>
-            </Link>
-            <Link
-              className="inline-flex h-10 items-center justify-center rounded-md border border-slate-200 border-gray-200 bg-white text-sm shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-950 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300 dark:border-slate-800"
-              href="#"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-              <span className="sr-only">LinkedIn</span>
+              <LinkedinIcon className="w-4 h-4 mr-2" />
+              <span className="text-xs">LinkedIn</span>
             </Link>
           </div>
           

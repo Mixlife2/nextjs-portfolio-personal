@@ -7,29 +7,48 @@ import { Article } from "./article";
 import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
 
-const redis = Redis.fromEnv();
+let redis: Redis | null = null;
+try {
+  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    redis = Redis.fromEnv();
+  }
+} catch (error) {
+  console.log("Redis not configured, using default view counts");
+}
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
-  const views = (
-    await redis.mget<number[]>(
-      ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
-    )
-  ).reduce((acc, v, i) => {
-    acc[allProjects[i].slug] = v ?? 0;
-    return acc;
-  }, {} as Record<string, number>);
+  let views: Record<string, number> = {};
+  
+  if (redis) {
+    try {
+      const viewsData = await redis.mget<number[]>(
+        ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
+      );
+      views = viewsData.reduce((acc, v, i) => {
+        acc[allProjects[i].slug] = v ?? 0;
+        return acc;
+      }, {} as Record<string, number>);
+    } catch (error) {
+      console.log("Failed to fetch view counts, using defaults");
+    }
+  }
 
-  const featured = allProjects.find((project) => project.slug === "turboweb")!;
-  const top2 = allProjects.find((project) => project.slug === "code-translator")!;
-  const top3 = allProjects.find((project) => project.slug === "AIchatbot")!;
+  const featured = allProjects.find((project) => project.slug === "canid-healthcare");
+  const top2 = allProjects.find((project) => project.slug === "blockchain-ledger");
+  const top3 = allProjects.find((project) => project.slug === "code-translator");
+  
+  if (!featured || !top2 || !top3) {
+    console.error("Required projects not found:", { featured: !!featured, top2: !!top2, top3: !!top3 });
+    console.log("Available projects:", allProjects.map(p => p.slug));
+  }
   const sorted = allProjects
     .filter((p) => p.published)
     .filter(
       (project) =>
-        project.slug !== featured.slug &&
-        project.slug !== top2.slug &&
-        project.slug !== top3.slug,
+        project.slug !== featured?.slug &&
+        project.slug !== top2?.slug &&
+        project.slug !== top3?.slug,
     )
     .sort(
       (a, b) =>
@@ -46,11 +65,12 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-zinc-400">
-            Some of the projects are from work and some are on my own time.
+            Professional work and personal projects exploring modern web technologies, healthcare SaaS, and AI integrations.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
 
+        {featured && top2 && top3 && (
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
           <Card>
             <Link href={`/projects/${featured.slug}`}>
@@ -101,6 +121,7 @@ export default async function ProjectsPage() {
             ))}
           </div>
         </div>
+        )}
         <div className="hidden w-full h-px md:block bg-zinc-800" />
 
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
