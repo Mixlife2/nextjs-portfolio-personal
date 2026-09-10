@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import { allProjects } from ".contentlayer/generated";
-import { Mdx } from "@/app/components/mdx";
+import { getAllProjects, getProjectBySlug, compileMDXContent } from "@/lib/projects";
 import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
@@ -24,6 +23,7 @@ try {
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const allProjects = await getAllProjects();
   return allProjects
     .filter((p) => p.published)
     .map((p) => ({
@@ -33,7 +33,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const project = allProjects.find((project) => project.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -48,13 +48,15 @@ export default async function PostPage({ params }: Props) {
     }
   }
 
+  const content = await compileMDXContent(project.content);
+
   return (
     <div className="bg-zinc-50 min-h-screen">
       <Header project={project} views={views} />
       <ReportView slug={project.slug} />
 
       <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
-        <Mdx code={project.body.code} />
+        {content}
       </article>
     </div>
   );
