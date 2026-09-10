@@ -68,25 +68,32 @@ const CoursesList = () => {
             Courses and Certifications
           </h2>
           <p className="mt-4 text-zinc-400">
-            Explore the courses and certifications completed.
+            Professional development through structured courses and certifications.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
 
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2">
-          {courses.map((course, index) => (
+          {courses.map((course) => (
             <Card key={course.id}>
               <Link href={`/courses/${course.id}`} passHref>
-                <div>
-                  <div className="p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16">
-                    <h3 className="text-lg font-semibold">{course.name}</h3>
-                    <p className="text-gray-600 mb-2">{course.platform} | {course.duration}</p>
-                    <p className="mb-2">{course.description}</p>
-                    <p className="font-medium">Certification: {course.certification}</p>
-                    <p className="font-medium">Date: {course.certificateInfo.date}</p>
-                    <p className="font-medium">Instructor: {course.certificateInfo.instructor}</p>
-                    <p className="text-blue-500 hover:text-blue-700">Ver detalles</p>
+                <div className="p-6 md:p-8 h-full flex flex-col gap-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="text-xl font-semibold text-zinc-100">{course.name}</h3>
                   </div>
+                  <div className="flex flex-wrap gap-2 text-sm text-zinc-400">
+                    <span>{course.platform}</span>
+                    <span>•</span>
+                    <span>{course.duration}</span>
+                  </div>
+                  <p className="text-zinc-400 flex-grow">{course.description}</p>
+                  <div className="space-y-1 text-sm">
+                    <p className="text-zinc-300">Certification: {course.certification}</p>
+                    <p className="text-zinc-400">Completed: {course.certificateInfo.date}</p>
+                  </div>
+                  <p className="text-zinc-300 hover:text-zinc-100 transition-colors">
+                    View details <span aria-hidden="true">→</span>
+                  </p>
                 </div>
               </Link>
             </Card>
